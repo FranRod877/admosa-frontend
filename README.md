@@ -6,9 +6,6 @@ Frontend en React + TypeScript para la gestión segura de archivos.
 - React
 - TypeScript
 - Vite
-- Axios
-- React Router
-- CSS modular / simple
 
 ## Requisitos
 - Node.js 18+
@@ -17,6 +14,7 @@ Frontend en React + TypeScript para la gestión segura de archivos.
 ## Ejecutar localmente
 ```bash
 npm install
+cp .env.example .env   # ajustar VITE_API_URL si el backend no corre en localhost:8080
 npm run dev
 ```
 
@@ -25,12 +23,15 @@ npm run dev
 - `develop` → trabajo activo
 
 ## Integración con backend
-- El frontend consumirá endpoints REST del backend Spring Boot.
-- Se recomienda usar Axios con un `baseURL` apuntando al backend en `http://localhost:8080`.
-- El login autenticará con JWT y se guardará en localStorage o memoria.
+- Consume la API REST del backend Spring Boot (`admosa-backend`) en `http://localhost:8080/api` por defecto.
+- `src/api/http.ts` envuelve `fetch`, agrega el JWT como `Authorization: Bearer` y cierra la sesión ante un 401.
+- El login guarda el JWT y los datos del usuario en `localStorage` (`src/auth/AuthContext.tsx`).
 
-## Siguiente paso
-- Crear estructura de módulos: auth, users, files, dashboard
-- Implementar login y protección de rutas
-- Consumir APIs de archivos por rol y área
-- Crear UI para roles: usuario, jefe de área, gerente, administrador
+## Estructura
+- `src/api` — cliente HTTP y llamadas a cada recurso (auth, files, history, users).
+- `src/auth` — contexto de autenticación y login.
+- `src/app` — layout con navegación condicionada por rol (cambia de vista sin recargar la página).
+- `src/files`, `src/history`, `src/admin` — páginas de archivos, historial y administración de usuarios.
+
+## Usuarios de prueba
+Mismas credenciales sembradas por el backend (ver su README): `admin@admosa.com`, `gerente@admosa.com`, `jefe@admosa.com`, `usuario@admosa.com`, `usuario2@admosa.com`, contraseña `Password123!` para todos.
