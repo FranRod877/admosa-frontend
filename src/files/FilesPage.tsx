@@ -1,5 +1,6 @@
 import { useEffect, useState, type ChangeEvent } from 'react'
 import * as filesApi from '../api/filesApi'
+import { FileActionsMenu } from './FileActionsMenu'
 import type { ArchivoResponse } from '../types'
 
 export function FilesPage() {
@@ -61,6 +62,15 @@ export function FilesPage() {
     }
   }
 
+  const handleView = async (id: string) => {
+    setError(null)
+    try {
+      await filesApi.viewFile(id)
+    } catch {
+      setError('No se pudo abrir la vista previa.')
+    }
+  }
+
   return (
     <section>
       <div className="section-header">
@@ -99,14 +109,13 @@ export function FilesPage() {
                   <td>{new Date(file.fechaCarga).toLocaleString()}</td>
                   <td>{formatSize(file.tamanio)}</td>
                   <td className="actions">
-                    {file.puedeDescargar && (
-                      <button onClick={() => handleDownload(file.id, file.nombreOriginal)}>Descargar</button>
-                    )}
-                    {file.puedeEliminar && (
-                      <button className="danger" onClick={() => handleDelete(file.id)}>
-                        Eliminar
-                      </button>
-                    )}
+                    <FileActionsMenu
+                      canDownload={file.puedeDescargar}
+                      canDelete={file.puedeEliminar}
+                      onView={() => handleView(file.id)}
+                      onDownload={() => handleDownload(file.id, file.nombreOriginal)}
+                      onDelete={() => handleDelete(file.id)}
+                    />
                   </td>
                 </tr>
               ))}

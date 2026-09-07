@@ -55,6 +55,19 @@ export function UsersPage() {
     }
   }
 
+  const handleGerenteAreaToggle = async (area: AreaResponse, usuario: Usuario, checked: boolean) => {
+    setSavingId(usuario.id)
+    setError(null)
+    try {
+      const actualizada = await usersApi.updateAreaGerente(area.id, checked ? usuario.id : null)
+      setAreas((prev) => prev.map((a) => (a.id === area.id ? actualizada : a)))
+    } catch {
+      setError('No se pudo actualizar el área gestionada.')
+    } finally {
+      setSavingId(null)
+    }
+  }
+
   return (
     <section>
       <div className="section-header">
@@ -74,6 +87,7 @@ export function UsersPage() {
                 <th>Correo</th>
                 <th>Rol</th>
                 <th>Área</th>
+                <th>Áreas que gestiona</th>
               </tr>
             </thead>
             <tbody>
@@ -107,6 +121,23 @@ export function UsersPage() {
                         </option>
                       ))}
                     </select>
+                  </td>
+                  <td>
+                    {usuario.rol === 'GERENTE' ? (
+                      areas.map((area) => (
+                        <label key={area.id} className="checkbox-label">
+                          <input
+                            type="checkbox"
+                            checked={area.gerenteId === usuario.id}
+                            disabled={savingId === usuario.id}
+                            onChange={(e) => handleGerenteAreaToggle(area, usuario, e.target.checked)}
+                          />
+                          {area.nombre}
+                        </label>
+                      ))
+                    ) : (
+                      <span className="empty">—</span>
+                    )}
                   </td>
                 </tr>
               ))}
