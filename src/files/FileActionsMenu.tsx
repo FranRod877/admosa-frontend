@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ChevronDownIcon, DownloadIcon, EyeIcon, TrashIcon } from '../components/icons'
+import { DownloadIcon, EyeIcon, MenuIcon, TrashIcon } from '../components/icons'
 
 interface FileActionsMenuProps {
   canDownload: boolean
@@ -43,8 +43,15 @@ export function FileActionsMenu({ canDownload, canDelete, onView, onDownload, on
 
   return (
     <div className="actions-menu" ref={containerRef}>
-      <button type="button" ref={triggerRef} className="actions-menu-trigger" onClick={toggleOpen}>
-        Acciones <ChevronDownIcon />
+      <button
+        type="button"
+        ref={triggerRef}
+        className="actions-menu-trigger"
+        onClick={toggleOpen}
+        aria-label="Acciones"
+        title="Acciones"
+      >
+        <MenuIcon />
       </button>
       {open && position && (
         <div className="actions-menu-list" style={{ top: position.top, left: position.left }}>

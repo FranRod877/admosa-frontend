@@ -26,10 +26,10 @@ export function TrashIcon() {
   )
 }
 
-export function ChevronDownIcon() {
+export function MenuIcon() {
   return (
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.8">
-      <path d="M5 8l5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M3 5.5h14M3 10h14M3 14.5h14" strokeLinecap="round" />
     </svg>
   )
 }
