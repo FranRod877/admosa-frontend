@@ -108,22 +108,25 @@ button.danger {
 .actions-menu-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
   background: transparent;
   color: var(--text-h);
   border: 1px solid var(--border);
-  font-size: 13px;
-  padding: 6px 10px;
+  border-radius: 6px;
+  padding: 0;
 }
 
 .actions-menu-trigger:hover {
   opacity: 1;
   border-color: var(--accent);
+  background: var(--code-bg);
 }
 
 .actions-menu-trigger svg {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 .actions-menu-list {
