@@ -12,3 +12,7 @@ export async function updateUser(id: number, request: UpdateUsuarioRequest): Pro
 export async function listAreas(): Promise<AreaResponse[]> {
   return getJson<AreaResponse[]>('/areas')
 }
+
+export async function updateAreaGerente(areaId: number, gerenteId: number | null): Promise<AreaResponse> {
+  return patchJson<AreaResponse>(`/areas/${areaId}`, { gerenteId })
+}

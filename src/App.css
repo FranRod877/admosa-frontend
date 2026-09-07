@@ -86,10 +86,91 @@ button.danger {
   border: 1px solid var(--border);
 }
 
-.data-table .actions button {
+.data-table .actions {
+  white-space: normal;
+}
+
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 14px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+/* Actions dropdown menu */
+
+.actions-menu {
+  display: inline-block;
+}
+
+.actions-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--text-h);
+  border: 1px solid var(--border);
   font-size: 13px;
   padding: 6px 10px;
-  margin-right: 6px;
+}
+
+.actions-menu-trigger:hover {
+  opacity: 1;
+  border-color: var(--accent);
+}
+
+.actions-menu-trigger svg {
+  width: 12px;
+  height: 12px;
+}
+
+.actions-menu-list {
+  position: fixed;
+  z-index: 50;
+  min-width: 160px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-menu-list button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-h);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.actions-menu-list button:hover {
+  opacity: 1;
+  background: var(--code-bg);
+}
+
+.actions-menu-list button.danger {
+  color: #d94848;
+  background: transparent;
+}
+
+.actions-menu-list button.danger:hover {
+  background: rgba(217, 72, 72, 0.12);
+}
+
+.actions-menu-list svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
 }
 
 /* App shell */
