@@ -246,6 +246,13 @@ button.danger {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 20px;
+  gap: 16px;
+}
+
+.hint {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text);
 }
 
 .error {

@@ -28,9 +28,21 @@ async function request(path: string, options: RequestOptions = {}): Promise<Resp
     unauthorizedHandler?.()
   }
   if (!response.ok) {
-    throw new Error(`Error ${response.status} en ${path}`)
+    throw new Error(await extractErrorMessage(response))
   }
   return response
+}
+
+async function extractErrorMessage(response: Response): Promise<string> {
+  try {
+    const data = (await response.clone().json()) as { message?: string }
+    if (typeof data.message === 'string' && data.message.length > 0) {
+      return data.message
+    }
+  } catch {
+    // el cuerpo no era JSON o no tenía "message"; se usa el mensaje genérico de abajo
+  }
+  return `Error ${response.status}`
 }
 
 export async function getJson<T>(path: string): Promise<T> {

@@ -3,6 +3,22 @@ import * as filesApi from '../api/filesApi'
 import { FileActionsMenu } from './FileActionsMenu'
 import type { ArchivoResponse } from '../types'
 
+// Debe coincidir con FileService.EXTENSIONES_PERMITIDAS en el backend.
+const EXTENSIONES_PERMITIDAS = [
+  'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'txt', 'csv',
+  'jpg', 'jpeg', 'png', 'gif', 'webp',
+]
+const TAMANIO_MAXIMO_MB = 25
+
+function extensionDe(nombreArchivo: string): string {
+  const puntoIndex = nombreArchivo.lastIndexOf('.')
+  return puntoIndex === -1 ? '' : nombreArchivo.slice(puntoIndex + 1).toLowerCase()
+}
+
+function mensajeDeError(err: unknown, fallback: string): string {
+  return err instanceof Error && err.message ? err.message : fallback
+}
+
 export function FilesPage() {
   const [files, setFiles] = useState<ArchivoResponse[]>([])
   const [loading, setLoading] = useState(true)
@@ -30,13 +46,26 @@ export function FilesPage() {
     event.target.value = ''
     if (!file) return
 
-    setUploading(true)
     setError(null)
+
+    const extension = extensionDe(file.name)
+    if (!EXTENSIONES_PERMITIDAS.includes(extension)) {
+      setError(
+        `Tipo de archivo no permitido (.${extension || '?'}). Formatos aceptados: ${EXTENSIONES_PERMITIDAS.join(', ')}.`,
+      )
+      return
+    }
+    if (file.size > TAMANIO_MAXIMO_MB * 1024 * 1024) {
+      setError(`El archivo supera el tamaño máximo permitido (${TAMANIO_MAXIMO_MB}MB).`)
+      return
+    }
+
+    setUploading(true)
     try {
       await filesApi.uploadFile(file)
       await load()
-    } catch {
-      setError('No se pudo subir el archivo.')
+    } catch (err) {
+      setError(mensajeDeError(err, 'No se pudo subir el archivo.'))
     } finally {
       setUploading(false)
     }
@@ -48,8 +77,8 @@ export function FilesPage() {
     try {
       await filesApi.deleteFile(id)
       await load()
-    } catch {
-      setError('No se pudo eliminar el archivo.')
+    } catch (err) {
+      setError(mensajeDeError(err, 'No se pudo eliminar el archivo.'))
     }
   }
 
@@ -57,8 +86,8 @@ export function FilesPage() {
     setError(null)
     try {
       await filesApi.downloadFile(id, filename)
-    } catch {
-      setError('No se pudo descargar el archivo.')
+    } catch (err) {
+      setError(mensajeDeError(err, 'No se pudo descargar el archivo.'))
     }
   }
 
@@ -66,15 +95,20 @@ export function FilesPage() {
     setError(null)
     try {
       await filesApi.viewFile(id)
-    } catch {
-      setError('No se pudo abrir la vista previa.')
+    } catch (err) {
+      setError(mensajeDeError(err, 'No se pudo abrir la vista previa.'))
     }
   }
 
   return (
     <section>
       <div className="section-header">
-        <h1>Archivos</h1>
+        <div>
+          <h1>Archivos</h1>
+          <p className="hint">
+            Formatos permitidos: {EXTENSIONES_PERMITIDAS.join(', ')} · Máximo {TAMANIO_MAXIMO_MB}MB
+          </p>
+        </div>
         <label className="upload-button">
           {uploading ? 'Subiendo…' : 'Subir archivo'}
           <input type="file" onChange={handleUpload} disabled={uploading} hidden />
