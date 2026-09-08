@@ -54,6 +54,9 @@ export function UsersPage() {
     try {
       const actualizado = await usersApi.updateUser(usuario.id, { rol })
       setUsuarios((prev) => prev.map((u) => (u.id === usuario.id ? actualizado : u)))
+      // Dejar de ser gerente libera las áreas que gestionaba: refrescamos para no mostrar datos obsoletos.
+      const areasData = await usersApi.listAreas()
+      setAreas(areasData)
     } catch {
       setError('No se pudo actualizar el rol.')
     } finally {
