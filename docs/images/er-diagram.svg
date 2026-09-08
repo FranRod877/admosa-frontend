@@ -1,4 +1,4 @@
-<svg viewBox="0 0 1160 1000" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+<svg viewBox="0 0 1480 610" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
   <defs>
     <style>
       .tbl-header { font-weight: 700; font-size: 15px; fill: #ffffff; }
@@ -6,245 +6,242 @@
       .col-type { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #6b7280; }
       .badge-pk { font-size: 9px; font-weight: 700; fill: #ffffff; }
       .badge-fk { font-size: 9px; font-weight: 700; fill: #ffffff; }
-      .rel-label { font-size: 11.5px; fill: #374151; font-weight: 600; }
-      .card-badge-text { font-size: 9.5px; font-weight: 700; }
+      .rel-label { font-size: 11px; fill: #374151; font-weight: 600; }
       .title { font-size: 20px; font-weight: 700; fill: #111827; }
       .subtitle { font-size: 12px; fill: #6b7280; }
       .note { font-size: 10.5px; fill: #6b7280; font-style: italic; }
       .legend-title { font-size: 14px; font-weight: 700; fill: #111827; }
-      .legend-text { font-size: 12px; fill: #374151; }
-      .legend-caption { font-size: 11px; fill: #4b5563; font-weight: 600; }
+      .legend-text { font-size: 11.5px; fill: #374151; }
+      .legend-caption { font-size: 11px; fill: #111827; font-weight: 700; }
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1160" height="1000" fill="#ffffff"/>
-  <text x="30" y="28" class="title">Diagrama entidad-relación — admosa_db</text>
-  <text x="30" y="46" class="subtitle">Generado a partir de la migración Flyway V1__schema.sql</text>
+  <rect x="0" y="0" width="1480" height="610" fill="#ffffff"/>
+  <text x="30" y="24" class="title">Diagrama entidad-relación — admosa_db</text>
+  <text x="30" y="41" class="subtitle">Generado a partir de la migración Flyway V1__schema.sql</text>
 
-  <!-- ===================== LEYENDA: como leer las lineas ===================== -->
-  <rect x="30" y="58" width="1100" height="134" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="8"/>
-  <text x="52" y="80" class="legend-title">¿Cómo leer las líneas de relación?</text>
-  <text x="52" y="99" class="legend-text">Cada línea conecta dos tablas. La "insignia" (círculo) junto a cada extremo indica cuántas filas de <tspan font-weight="700">esa</tspan> tabla pueden</text>
-  <text x="52" y="115" class="legend-text">acompañar a una sola fila de la tabla del otro lado:</text>
+  <!-- ===================== LEYENDA ===================== -->
+  <rect x="30" y="50" width="1420" height="128" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="8"/>
+  <text x="52" y="70" class="legend-title">¿Cómo leer las líneas de relación?</text>
+  <text x="52" y="87" class="legend-text">Cada extremo de la línea tiene una marca que indica cuántas filas de esa tabla pueden participar en la relación:</text>
 
-  <!-- Badge ejemplo: 1 -->
-  <circle cx="75" cy="140" r="13" fill="#1e293b"/>
-  <text x="75" y="144" class="card-badge-text" fill="#ffffff" text-anchor="middle">1</text>
-  <text x="98" y="137" class="legend-caption">exactamente uno</text>
-  <text x="98" y="150" class="legend-text">(ese lado SIEMPRE tiene una fila relacionada)</text>
+  <!-- Ejemplo 1: uno -->
+  <line x1="70" y1="128" x2="150" y2="128" stroke="#111827" stroke-width="1.6"/>
+  <line x1="77" y1="121" x2="77" y2="135" stroke="#111827" stroke-width="1.6"/>
+  <line x1="82" y1="121" x2="82" y2="135" stroke="#111827" stroke-width="1.6"/>
+  <text x="98" y="150" class="legend-caption">Exactamente uno</text>
+  <text x="98" y="164" class="legend-text">(ese lado siempre tiene una fila)</text>
 
-  <!-- Badge ejemplo: 0-1 -->
-  <circle cx="425" cy="140" r="13" fill="#ffffff" stroke="#1e293b" stroke-width="1.5"/>
-  <text x="425" y="144" class="card-badge-text" fill="#1e293b" text-anchor="middle">0-1</text>
-  <text x="448" y="137" class="legend-caption">cero o uno (opcional)</text>
-  <text x="448" y="150" class="legend-text">(puede no tener ninguna fila relacionada)</text>
+  <!-- Ejemplo 2: cero o uno -->
+  <line x1="440" y1="128" x2="520" y2="128" stroke="#111827" stroke-width="1.6"/>
+  <line x1="452" y1="121" x2="452" y2="135" stroke="#111827" stroke-width="1.6"/>
+  <circle cx="465" cy="128" r="5.5" fill="#ffffff" stroke="#111827" stroke-width="1.6"/>
+  <text x="468" y="150" class="legend-caption">Cero o uno</text>
+  <text x="468" y="164" class="legend-text">(opcional — la columna admite NULL)</text>
 
-  <!-- Badge ejemplo: 0-N -->
-  <circle cx="800" cy="140" r="13" fill="#ffffff" stroke="#1e293b" stroke-width="1.5"/>
-  <text x="800" y="144" class="card-badge-text" fill="#1e293b" text-anchor="middle">0-N</text>
-  <text x="823" y="137" class="legend-caption">cero, una o muchas</text>
-  <text x="823" y="150" class="legend-text">(puede tener varias filas relacionadas)</text>
+  <!-- Ejemplo 3: cero, una o muchas -->
+  <line x1="850" y1="128" x2="930" y2="128" stroke="#111827" stroke-width="1.6"/>
+  <path d="M 863,128 L 876,121 M 863,128 L 876,128 M 863,128 L 876,135" fill="none" stroke="#111827" stroke-width="1.6"/>
+  <circle cx="885" cy="128" r="5.5" fill="#ffffff" stroke="#111827" stroke-width="1.6"/>
+  <text x="900" y="150" class="legend-caption">Cero, una o muchas</text>
+  <text x="900" y="164" class="legend-text">(lado de "muchos": ahí vive la llave foránea)</text>
 
-  <text x="52" y="176" class="legend-text">Ejemplo con la línea <tspan fill="#db2777" font-weight="700">rosa</tspan>: el lado de USUARIOS tiene la insignia "0-1" (un usuario pertenece nada más a un área, o a</text>
-  <text x="52" y="192" class="legend-text">ninguna) y el lado de AREAS tiene la insignia "0-N" (un área puede tener cero, uno o muchos usuarios).</text>
+  <!-- ===================== RELACIONES (lineas ortogonales) ===================== -->
 
-  <!-- ===================== RELATIONSHIP CURVES ===================== -->
+  <!-- R1: usuarios.area_id -> areas.id (rosa) -->
+  <path d="M 380,423 H 340 V 283 H 300" fill="none" stroke="#db2777" stroke-width="1.8"/>
+  <line x1="368" y1="417" x2="368" y2="429" stroke="#db2777" stroke-width="1.8"/>
+  <circle cx="359" cy="423" r="5" fill="#ffffff" stroke="#db2777" stroke-width="1.6"/>
+  <path d="M 300,283 L 313,276 M 300,283 L 313,283 M 300,283 L 313,290" fill="none" stroke="#db2777" stroke-width="1.8"/>
+  <circle cx="322" cy="283" r="5" fill="#ffffff" stroke="#db2777" stroke-width="1.6"/>
+  <text x="345" y="358" class="rel-label" fill="#db2777">area_id</text>
 
-  <!-- 1. usuarios.area_id -> areas.id (pink) -->
-  <path d="M 340,393 Q 570,430 800,253" fill="none" stroke="#db2777" stroke-width="2"/>
-  <circle cx="356" cy="396" r="12" fill="#ffffff" stroke="#db2777" stroke-width="1.5"/>
-  <text x="356" y="400" class="card-badge-text" fill="#db2777" text-anchor="middle">0-1</text>
-  <circle cx="784" cy="250" r="12" fill="#ffffff" stroke="#db2777" stroke-width="1.5"/>
-  <text x="784" y="254" class="card-badge-text" fill="#db2777" text-anchor="middle">0-N</text>
-  <text x="490" y="405" class="rel-label" fill="#db2777">area_id</text>
+  <!-- R2: areas.gerente_id -> usuarios.id (cian) -->
+  <path d="M 300,339 H 360 V 283 H 380" fill="none" stroke="#0891b2" stroke-width="1.8"/>
+  <line x1="312" y1="333" x2="312" y2="345" stroke="#0891b2" stroke-width="1.8"/>
+  <circle cx="321" cy="339" r="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.6"/>
+  <path d="M 380,283 L 367,276 M 380,283 L 367,283 M 380,283 L 367,290" fill="none" stroke="#0891b2" stroke-width="1.8"/>
+  <circle cx="358" cy="283" r="5" fill="#ffffff" stroke="#0891b2" stroke-width="1.6"/>
+  <text x="363" y="307" class="rel-label" fill="#0891b2">gerente_id</text>
 
-  <!-- 2. areas.gerente_id -> usuarios.id (cyan) -->
-  <path d="M 800,309 Q 570,220 340,253" fill="none" stroke="#0891b2" stroke-width="2"/>
-  <circle cx="784" cy="306" r="12" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
-  <text x="784" y="310" class="card-badge-text" fill="#0891b2" text-anchor="middle">0-1</text>
-  <circle cx="356" cy="256" r="12" fill="#ffffff" stroke="#0891b2" stroke-width="1.5"/>
-  <text x="356" y="260" class="card-badge-text" fill="#0891b2" text-anchor="middle">0-N</text>
-  <text x="500" y="228" class="rel-label" fill="#0891b2">gerente_id</text>
+  <!-- R3: archivos.propietario_id -> usuarios.id (verde oliva) -->
+  <path d="M 760,423 H 720 V 283 H 680" fill="none" stroke="#65a30d" stroke-width="1.8"/>
+  <line x1="753" y1="417" x2="753" y2="429" stroke="#65a30d" stroke-width="1.8"/>
+  <line x1="748" y1="417" x2="748" y2="429" stroke="#65a30d" stroke-width="1.8"/>
+  <path d="M 680,283 L 693,276 M 680,283 L 693,283 M 680,283 L 693,290" fill="none" stroke="#65a30d" stroke-width="1.8"/>
+  <circle cx="702" cy="283" r="5" fill="#ffffff" stroke="#65a30d" stroke-width="1.6"/>
+  <text x="690" y="358" class="rel-label" fill="#65a30d">propietario_id</text>
 
-  <!-- 3. archivos.propietario_id -> usuarios.id (lime) -->
-  <path d="M 140,630 Q 108,530 160,430" fill="none" stroke="#65a30d" stroke-width="2"/>
-  <circle cx="136" cy="616" r="12" fill="#ffffff" stroke="#65a30d" stroke-width="1.5"/>
-  <text x="136" y="620" class="card-badge-text" fill="#65a30d" text-anchor="middle">1</text>
-  <circle cx="164" cy="444" r="12" fill="#ffffff" stroke="#65a30d" stroke-width="1.5"/>
-  <text x="164" y="448" class="card-badge-text" fill="#65a30d" text-anchor="middle">0-N</text>
-  <text x="10" y="534" class="rel-label" fill="#65a30d">propietario_id</text>
+  <!-- R6: historial_acciones.archivo_id -> archivos.id (gris pizarra) -->
+  <path d="M 1140,339 H 1100 V 283 H 1060" fill="none" stroke="#475569" stroke-width="1.8"/>
+  <line x1="1128" y1="333" x2="1128" y2="345" stroke="#475569" stroke-width="1.8"/>
+  <circle cx="1119" cy="339" r="5" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <path d="M 1060,283 L 1073,276 M 1060,283 L 1073,283 M 1060,283 L 1073,290" fill="none" stroke="#475569" stroke-width="1.8"/>
+  <circle cx="1082" cy="283" r="5" fill="#ffffff" stroke="#475569" stroke-width="1.6"/>
+  <text x="1070" y="307" class="rel-label" fill="#475569">archivo_id</text>
 
-  <!-- 4. archivos.area_id -> areas.id (orange) -->
-  <path d="M 310,630 Q 560,500 860,370" fill="none" stroke="#ea580c" stroke-width="2"/>
-  <circle cx="316" cy="616" r="12" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
-  <text x="316" y="620" class="card-badge-text" fill="#ea580c" text-anchor="middle">0-1</text>
-  <circle cx="866" cy="384" r="12" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"/>
-  <text x="866" y="388" class="card-badge-text" fill="#ea580c" text-anchor="middle">0-N</text>
-  <text x="560" y="480" class="rel-label" fill="#ea580c">area_id</text>
+  <!-- R4: archivos.area_id -> areas.id (naranja), rodea por debajo -->
+  <path d="M 820,502 V 540 H 170 V 380" fill="none" stroke="#ea580c" stroke-width="1.8"/>
+  <line x1="814" y1="514" x2="826" y2="514" stroke="#ea580c" stroke-width="1.8"/>
+  <circle cx="820" cy="523" r="5" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+  <path d="M 170,380 L 163,393 M 170,380 L 170,393 M 170,380 L 177,393" fill="none" stroke="#ea580c" stroke-width="1.8"/>
+  <circle cx="170" cy="402" r="5" fill="#ffffff" stroke="#ea580c" stroke-width="1.6"/>
+  <text x="450" y="555" class="rel-label" fill="#ea580c">area_id</text>
 
-  <!-- 5. historial_acciones.usuario_id -> usuarios.id (red) -->
-  <path d="M 850,630 Q 560,540 300,430" fill="none" stroke="#dc2626" stroke-width="2"/>
-  <circle cx="844" cy="616" r="12" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
-  <text x="844" y="620" class="card-badge-text" fill="#dc2626" text-anchor="middle">1</text>
-  <circle cx="294" cy="444" r="12" fill="#ffffff" stroke="#dc2626" stroke-width="1.5"/>
-  <text x="294" y="448" class="card-badge-text" fill="#dc2626" text-anchor="middle">0-N</text>
-  <text x="470" y="565" class="rel-label" fill="#dc2626">usuario_id</text>
-
-  <!-- 6. historial_acciones.archivo_id -> archivos.id (slate) -->
-  <path d="M 800,739 Q 580,705 360,683" fill="none" stroke="#475569" stroke-width="2"/>
-  <circle cx="784" cy="742" r="12" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
-  <text x="784" y="746" class="card-badge-text" fill="#475569" text-anchor="middle">0-1</text>
-  <circle cx="374" cy="680" r="12" fill="#ffffff" stroke="#475569" stroke-width="1.5"/>
-  <text x="374" y="684" class="card-badge-text" fill="#475569" text-anchor="middle">0-N</text>
-  <text x="540" y="724" class="rel-label" fill="#475569">archivo_id</text>
+  <!-- R5: historial_acciones.usuario_id -> usuarios.id (rojo), rodea por arriba -->
+  <path d="M 1180,230 V 195 H 550 V 230" fill="none" stroke="#dc2626" stroke-width="1.8"/>
+  <line x1="1173" y1="223" x2="1187" y2="223" stroke="#dc2626" stroke-width="1.8"/>
+  <line x1="1173" y1="218" x2="1187" y2="218" stroke="#dc2626" stroke-width="1.8"/>
+  <path d="M 550,230 L 543,217 M 550,230 L 550,217 M 550,230 L 557,217" fill="none" stroke="#dc2626" stroke-width="1.8"/>
+  <circle cx="550" cy="208" r="5" fill="#ffffff" stroke="#dc2626" stroke-width="1.6"/>
+  <text x="800" y="189" class="rel-label" fill="#dc2626">usuario_id</text>
 
   <!-- ===================== USUARIOS ===================== -->
   <g>
-    <rect x="40" y="200" width="300" height="230" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" rx="6"/>
-    <path d="M 40,206 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#1d4ed8"/>
-    <text x="56" y="223" class="tbl-header">USUARIOS</text>
+    <rect x="380" y="230" width="300" height="230" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" rx="6"/>
+    <path d="M 380,236 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#1d4ed8"/>
+    <text x="396" y="253" class="tbl-header">USUARIOS</text>
 
-    <rect x="56" y="242" width="20" height="14" rx="3" fill="#1d4ed8"/>
-    <text x="60" y="252" class="badge-pk">PK</text>
-    <text x="86" y="253" class="col-name">id</text>
-    <text x="324" y="253" class="col-type" text-anchor="end">bigint</text>
-    <line x1="40" y1="262" x2="340" y2="262" stroke="#e5e7eb"/>
+    <rect x="396" y="272" width="20" height="14" rx="3" fill="#1d4ed8"/>
+    <text x="400" y="282" class="badge-pk">PK</text>
+    <text x="426" y="283" class="col-name">id</text>
+    <text x="664" y="283" class="col-type" text-anchor="end">bigint</text>
+    <line x1="380" y1="292" x2="680" y2="292" stroke="#e5e7eb"/>
 
-    <text x="86" y="281" class="col-name">nombre</text>
-    <text x="324" y="281" class="col-type" text-anchor="end">varchar(150)</text>
-    <line x1="40" y1="290" x2="340" y2="290" stroke="#e5e7eb"/>
+    <text x="426" y="311" class="col-name">nombre</text>
+    <text x="664" y="311" class="col-type" text-anchor="end">varchar(150)</text>
+    <line x1="380" y1="320" x2="680" y2="320" stroke="#e5e7eb"/>
 
-    <text x="86" y="309" class="col-name">email</text>
-    <text x="324" y="309" class="col-type" text-anchor="end">varchar(150) UQ</text>
-    <line x1="40" y1="318" x2="340" y2="318" stroke="#e5e7eb"/>
+    <text x="426" y="339" class="col-name">email</text>
+    <text x="664" y="339" class="col-type" text-anchor="end">varchar(150) UQ</text>
+    <line x1="380" y1="348" x2="680" y2="348" stroke="#e5e7eb"/>
 
-    <text x="86" y="337" class="col-name">password_hash</text>
-    <text x="324" y="337" class="col-type" text-anchor="end">varchar(255)</text>
-    <line x1="40" y1="346" x2="340" y2="346" stroke="#e5e7eb"/>
+    <text x="426" y="367" class="col-name">password_hash</text>
+    <text x="664" y="367" class="col-type" text-anchor="end">varchar(255)</text>
+    <line x1="380" y1="376" x2="680" y2="376" stroke="#e5e7eb"/>
 
-    <text x="86" y="365" class="col-name">rol</text>
-    <text x="324" y="365" class="col-type" text-anchor="end">varchar(30)</text>
-    <line x1="40" y1="374" x2="340" y2="374" stroke="#e5e7eb"/>
+    <text x="426" y="395" class="col-name">rol</text>
+    <text x="664" y="395" class="col-type" text-anchor="end">varchar(30)</text>
+    <line x1="380" y1="404" x2="680" y2="404" stroke="#e5e7eb"/>
 
-    <rect x="56" y="382" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="59" y="392" class="badge-fk">FK</text>
-    <text x="86" y="393" class="col-name">area_id</text>
-    <text x="324" y="393" class="col-type" text-anchor="end">bigint NULL</text>
+    <rect x="396" y="412" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="399" y="422" class="badge-fk">FK</text>
+    <text x="426" y="423" class="col-name">area_id</text>
+    <text x="664" y="423" class="col-type" text-anchor="end">bigint NULL</text>
 
-    <text x="56" y="415" class="note">rol ∈ {USUARIO_ESTANDAR, JEFE_AREA, GERENTE, ADMINISTRADOR}</text>
+    <text x="396" y="445" class="note">rol ∈ {USUARIO_ESTANDAR, JEFE_AREA, GERENTE, ADMINISTRADOR}</text>
   </g>
 
   <!-- ===================== AREAS ===================== -->
   <g>
-    <rect x="800" y="200" width="300" height="170" fill="#ffffff" stroke="#15803d" stroke-width="1.5" rx="6"/>
-    <path d="M 800,206 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#15803d"/>
-    <text x="816" y="223" class="tbl-header">AREAS</text>
+    <rect x="40" y="230" width="260" height="150" fill="#ffffff" stroke="#15803d" stroke-width="1.5" rx="6"/>
+    <path d="M 40,236 a 6,6 0 0 1 6,-6 h 248 a 6,6 0 0 1 6,6 v 28 h -260 z" fill="#15803d"/>
+    <text x="56" y="253" class="tbl-header">AREAS</text>
 
-    <rect x="816" y="242" width="20" height="14" rx="3" fill="#15803d"/>
-    <text x="820" y="252" class="badge-pk">PK</text>
-    <text x="846" y="253" class="col-name">id</text>
-    <text x="1084" y="253" class="col-type" text-anchor="end">bigint</text>
-    <line x1="800" y1="262" x2="1100" y2="262" stroke="#e5e7eb"/>
+    <rect x="56" y="272" width="20" height="14" rx="3" fill="#15803d"/>
+    <text x="60" y="282" class="badge-pk">PK</text>
+    <text x="86" y="283" class="col-name">id</text>
+    <text x="284" y="283" class="col-type" text-anchor="end">bigint</text>
+    <line x1="40" y1="292" x2="300" y2="292" stroke="#e5e7eb"/>
 
-    <text x="846" y="281" class="col-name">nombre</text>
-    <text x="1084" y="281" class="col-type" text-anchor="end">varchar(100) UQ</text>
-    <line x1="800" y1="290" x2="1100" y2="290" stroke="#e5e7eb"/>
+    <text x="86" y="311" class="col-name">nombre</text>
+    <text x="284" y="311" class="col-type" text-anchor="end">varchar(100) UQ</text>
+    <line x1="40" y1="320" x2="300" y2="320" stroke="#e5e7eb"/>
 
-    <rect x="816" y="298" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="819" y="308" class="badge-fk">FK</text>
-    <text x="846" y="309" class="col-name">gerente_id</text>
-    <text x="1084" y="309" class="col-type" text-anchor="end">bigint NULL</text>
+    <rect x="56" y="328" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="59" y="338" class="badge-fk">FK</text>
+    <text x="86" y="339" class="col-name">gerente_id</text>
+    <text x="284" y="339" class="col-type" text-anchor="end">bigint NULL</text>
 
-    <text x="816" y="340" class="note">gerente_id referencia a un usuario con rol GERENTE</text>
+    <text x="56" y="362" class="note">gerente_id: usuario</text>
+    <text x="56" y="374" class="note">con rol GERENTE</text>
   </g>
 
   <!-- ===================== ARCHIVOS ===================== -->
   <g>
-    <rect x="40" y="630" width="320" height="272" fill="#ffffff" stroke="#b45309" stroke-width="1.5" rx="6"/>
-    <path d="M 40,636 a 6,6 0 0 1 6,-6 h 308 a 6,6 0 0 1 6,6 v 28 h -320 z" fill="#b45309"/>
-    <text x="56" y="653" class="tbl-header">ARCHIVOS</text>
+    <rect x="760" y="230" width="300" height="272" fill="#ffffff" stroke="#b45309" stroke-width="1.5" rx="6"/>
+    <path d="M 760,236 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#b45309"/>
+    <text x="776" y="253" class="tbl-header">ARCHIVOS</text>
 
-    <rect x="56" y="672" width="20" height="14" rx="3" fill="#b45309"/>
-    <text x="60" y="682" class="badge-pk">PK</text>
-    <text x="86" y="683" class="col-name">id</text>
-    <text x="344" y="683" class="col-type" text-anchor="end">uuid</text>
-    <line x1="40" y1="692" x2="360" y2="692" stroke="#e5e7eb"/>
+    <rect x="776" y="272" width="20" height="14" rx="3" fill="#b45309"/>
+    <text x="780" y="282" class="badge-pk">PK</text>
+    <text x="806" y="283" class="col-name">id</text>
+    <text x="1044" y="283" class="col-type" text-anchor="end">uuid</text>
+    <line x1="760" y1="292" x2="1060" y2="292" stroke="#e5e7eb"/>
 
-    <text x="86" y="711" class="col-name">nombre_original</text>
-    <text x="344" y="711" class="col-type" text-anchor="end">varchar(255)</text>
-    <line x1="40" y1="720" x2="360" y2="720" stroke="#e5e7eb"/>
+    <text x="806" y="311" class="col-name">nombre_original</text>
+    <text x="1044" y="311" class="col-type" text-anchor="end">varchar(255)</text>
+    <line x1="760" y1="320" x2="1060" y2="320" stroke="#e5e7eb"/>
 
-    <text x="86" y="739" class="col-name">storage_key</text>
-    <text x="344" y="739" class="col-type" text-anchor="end">varchar(100) UQ</text>
-    <line x1="40" y1="748" x2="360" y2="748" stroke="#e5e7eb"/>
+    <text x="806" y="339" class="col-name">storage_key</text>
+    <text x="1044" y="339" class="col-type" text-anchor="end">varchar(100) UQ</text>
+    <line x1="760" y1="348" x2="1060" y2="348" stroke="#e5e7eb"/>
 
-    <text x="86" y="767" class="col-name">content_type</text>
-    <text x="344" y="767" class="col-type" text-anchor="end">varchar(150)</text>
-    <line x1="40" y1="776" x2="360" y2="776" stroke="#e5e7eb"/>
+    <text x="806" y="367" class="col-name">content_type</text>
+    <text x="1044" y="367" class="col-type" text-anchor="end">varchar(150)</text>
+    <line x1="760" y1="376" x2="1060" y2="376" stroke="#e5e7eb"/>
 
-    <text x="86" y="795" class="col-name">tamanio</text>
-    <text x="344" y="795" class="col-type" text-anchor="end">bigint</text>
-    <line x1="40" y1="804" x2="360" y2="804" stroke="#e5e7eb"/>
+    <text x="806" y="395" class="col-name">tamanio</text>
+    <text x="1044" y="395" class="col-type" text-anchor="end">bigint</text>
+    <line x1="760" y1="404" x2="1060" y2="404" stroke="#e5e7eb"/>
 
-    <rect x="56" y="812" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="59" y="822" class="badge-fk">FK</text>
-    <text x="86" y="823" class="col-name">propietario_id</text>
-    <text x="344" y="823" class="col-type" text-anchor="end">bigint</text>
-    <line x1="40" y1="832" x2="360" y2="832" stroke="#e5e7eb"/>
+    <rect x="776" y="412" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="779" y="422" class="badge-fk">FK</text>
+    <text x="806" y="423" class="col-name">propietario_id</text>
+    <text x="1044" y="423" class="col-type" text-anchor="end">bigint</text>
+    <line x1="760" y1="432" x2="1060" y2="432" stroke="#e5e7eb"/>
 
-    <rect x="56" y="840" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="59" y="850" class="badge-fk">FK</text>
-    <text x="86" y="851" class="col-name">area_id</text>
-    <text x="344" y="851" class="col-type" text-anchor="end">bigint NULL</text>
-    <line x1="40" y1="860" x2="360" y2="860" stroke="#e5e7eb"/>
+    <rect x="776" y="440" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="779" y="450" class="badge-fk">FK</text>
+    <text x="806" y="451" class="col-name">area_id</text>
+    <text x="1044" y="451" class="col-type" text-anchor="end">bigint NULL</text>
+    <line x1="760" y1="460" x2="1060" y2="460" stroke="#e5e7eb"/>
 
-    <text x="86" y="879" class="col-name">fecha_carga</text>
-    <text x="344" y="879" class="col-type" text-anchor="end">timestamp</text>
+    <text x="806" y="479" class="col-name">fecha_carga</text>
+    <text x="1044" y="479" class="col-type" text-anchor="end">timestamp</text>
   </g>
 
   <!-- ===================== HISTORIAL_ACCIONES ===================== -->
   <g>
-    <rect x="800" y="630" width="300" height="292" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="6"/>
-    <path d="M 800,636 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#7c3aed"/>
-    <text x="816" y="653" class="tbl-header">HISTORIAL_ACCIONES</text>
+    <rect x="1140" y="230" width="280" height="292" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="6"/>
+    <path d="M 1140,236 a 6,6 0 0 1 6,-6 h 268 a 6,6 0 0 1 6,6 v 28 h -280 z" fill="#7c3aed"/>
+    <text x="1156" y="253" class="tbl-header">HISTORIAL_ACCIONES</text>
 
-    <rect x="816" y="672" width="20" height="14" rx="3" fill="#7c3aed"/>
-    <text x="820" y="682" class="badge-pk">PK</text>
-    <text x="846" y="683" class="col-name">id</text>
-    <text x="1084" y="683" class="col-type" text-anchor="end">bigint</text>
-    <line x1="800" y1="692" x2="1100" y2="692" stroke="#e5e7eb"/>
+    <rect x="1156" y="272" width="20" height="14" rx="3" fill="#7c3aed"/>
+    <text x="1160" y="282" class="badge-pk">PK</text>
+    <text x="1186" y="283" class="col-name">id</text>
+    <text x="1404" y="283" class="col-type" text-anchor="end">bigint</text>
+    <line x1="1140" y1="292" x2="1420" y2="292" stroke="#e5e7eb"/>
 
-    <rect x="816" y="700" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="819" y="710" class="badge-fk">FK</text>
-    <text x="846" y="711" class="col-name">usuario_id</text>
-    <text x="1084" y="711" class="col-type" text-anchor="end">bigint</text>
-    <line x1="800" y1="720" x2="1100" y2="720" stroke="#e5e7eb"/>
+    <rect x="1156" y="300" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="1159" y="310" class="badge-fk">FK</text>
+    <text x="1186" y="311" class="col-name">usuario_id</text>
+    <text x="1404" y="311" class="col-type" text-anchor="end">bigint</text>
+    <line x1="1140" y1="320" x2="1420" y2="320" stroke="#e5e7eb"/>
 
-    <rect x="816" y="728" width="20" height="14" rx="3" fill="#6b7280"/>
-    <text x="819" y="738" class="badge-fk">FK</text>
-    <text x="846" y="739" class="col-name">archivo_id</text>
-    <text x="1084" y="739" class="col-type" text-anchor="end">uuid NULL</text>
-    <line x1="800" y1="748" x2="1100" y2="748" stroke="#e5e7eb"/>
+    <rect x="1156" y="328" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="1159" y="338" class="badge-fk">FK</text>
+    <text x="1186" y="339" class="col-name">archivo_id</text>
+    <text x="1404" y="339" class="col-type" text-anchor="end">uuid NULL</text>
+    <line x1="1140" y1="348" x2="1420" y2="348" stroke="#e5e7eb"/>
 
-    <text x="846" y="767" class="col-name">accion</text>
-    <text x="1084" y="767" class="col-type" text-anchor="end">varchar(30)</text>
-    <line x1="800" y1="776" x2="1100" y2="776" stroke="#e5e7eb"/>
+    <text x="1186" y="367" class="col-name">accion</text>
+    <text x="1404" y="367" class="col-type" text-anchor="end">varchar(30)</text>
+    <line x1="1140" y1="376" x2="1420" y2="376" stroke="#e5e7eb"/>
 
-    <text x="846" y="795" class="col-name">fecha</text>
-    <text x="1084" y="795" class="col-type" text-anchor="end">timestamp</text>
-    <line x1="800" y1="804" x2="1100" y2="804" stroke="#e5e7eb"/>
+    <text x="1186" y="395" class="col-name">fecha</text>
+    <text x="1404" y="395" class="col-type" text-anchor="end">timestamp</text>
+    <line x1="1140" y1="404" x2="1420" y2="404" stroke="#e5e7eb"/>
 
-    <text x="846" y="823" class="col-name">detalle</text>
-    <text x="1084" y="823" class="col-type" text-anchor="end">varchar(255)</text>
+    <text x="1186" y="423" class="col-name">detalle</text>
+    <text x="1404" y="423" class="col-type" text-anchor="end">varchar(255)</text>
 
-    <text x="816" y="850" class="note">accion ∈ {CARGA, VISUALIZACION,</text>
-    <text x="826" y="863" class="note">DESCARGA, ELIMINACION}</text>
-    <text x="816" y="882" class="note">archivo_id queda en NULL si el</text>
-    <text x="826" y="895" class="note">archivo se elimina (ON DELETE</text>
-    <text x="826" y="908" class="note">SET NULL)</text>
+    <text x="1156" y="446" class="note">accion ∈ {CARGA, VISUALIZACION, DESCARGA, ELIMINACION}</text>
+    <text x="1156" y="460" class="note">archivo_id queda en NULL si el archivo se elimina</text>
+    <text x="1156" y="472" class="note">(ON DELETE SET NULL)</text>
   </g>
 
   <!-- Glosario rapido -->
-  <text x="30" y="960" class="subtitle">Glosario: PK = llave primaria · FK = llave foránea · UQ = restricción unique · NULL = la columna admite valor vacío</text>
-  <text x="30" y="976" class="subtitle">Las insignias "1 / 0-1 / 0-N" son la notación estándar de cardinalidad en diagramas entidad-relación (equivalente a "1 / 0..1 / 0..N")</text>
+  <text x="30" y="565" class="subtitle">Glosario: PK = llave primaria · FK = llave foránea · UQ = restricción unique · NULL = la columna admite valor vacío</text>
+  <text x="30" y="582" class="subtitle">Cada línea de color une una llave foránea con la llave primaria que referencia; el color solo distingue una relación de otra.</text>
 </svg>
