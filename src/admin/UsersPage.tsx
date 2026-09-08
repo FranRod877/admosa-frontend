@@ -156,8 +156,13 @@ export function UsersPage() {
                     </td>
                     <td>
                       <select
-                        value={usuario.areaId ?? ''}
-                        disabled={savingId === usuario.id}
+                        value={usuario.rol === 'GERENTE' || usuario.rol === 'ADMINISTRADOR' ? '' : usuario.areaId ?? ''}
+                        disabled={savingId === usuario.id || usuario.rol === 'GERENTE' || usuario.rol === 'ADMINISTRADOR'}
+                        title={
+                          usuario.rol === 'GERENTE' || usuario.rol === 'ADMINISTRADOR'
+                            ? 'Los gerentes y administradores no pertenecen a un área'
+                            : undefined
+                        }
                         onChange={(e) => handleAreaChange(usuario, e.target.value)}
                       >
                         <option value="">Sin área</option>

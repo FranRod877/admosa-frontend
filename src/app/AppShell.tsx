@@ -11,6 +11,7 @@ export function AppShell() {
   const { usuario, logout } = useAuth()
   const [view, setView] = useState<View>('files')
   const isAdmin = usuario?.rol === 'ADMINISTRADOR'
+  const canSeeHistory = usuario?.rol === 'GERENTE' || usuario?.rol === 'ADMINISTRADOR'
 
   return (
     <div className="app-shell">
@@ -20,9 +21,11 @@ export function AppShell() {
           <button className={view === 'files' ? 'active' : ''} onClick={() => setView('files')}>
             Archivos
           </button>
-          <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')}>
-            Historial
-          </button>
+          {canSeeHistory && (
+            <button className={view === 'history' ? 'active' : ''} onClick={() => setView('history')}>
+              Historial
+            </button>
+          )}
           {isAdmin && (
             <button className={view === 'admin' ? 'active' : ''} onClick={() => setView('admin')}>
               Usuarios
@@ -40,7 +43,7 @@ export function AppShell() {
       </header>
       <main className="app-content">
         {view === 'files' && <FilesPage />}
-        {view === 'history' && <HistoryPage />}
+        {view === 'history' && canSeeHistory && <HistoryPage />}
         {view === 'admin' && isAdmin && <UsersPage />}
       </main>
     </div>
