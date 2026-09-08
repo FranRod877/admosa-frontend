@@ -1,0 +1,208 @@
+<svg viewBox="0 0 1160 830" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Arial, sans-serif">
+  <defs>
+    <style>
+      .tbl-header { font-weight: 700; font-size: 15px; fill: #ffffff; }
+      .col-name { font-family: Consolas, 'Courier New', monospace; font-size: 12.5px; fill: #1f2937; }
+      .col-type { font-family: Consolas, 'Courier New', monospace; font-size: 11px; fill: #6b7280; }
+      .badge-pk { font-size: 9px; font-weight: 700; fill: #ffffff; }
+      .badge-fk { font-size: 9px; font-weight: 700; fill: #ffffff; }
+      .rel-label { font-size: 11.5px; fill: #374151; font-weight: 600; }
+      .rel-card { font-size: 11px; font-weight: 700; }
+      .title { font-size: 20px; font-weight: 700; fill: #111827; }
+      .subtitle { font-size: 12px; fill: #6b7280; }
+      .note { font-size: 10.5px; fill: #6b7280; font-style: italic; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1160" height="830" fill="#ffffff"/>
+  <text x="30" y="28" class="title">Diagrama entidad-relación — admosa_db</text>
+  <text x="30" y="46" class="subtitle">Generado a partir de la migración Flyway V1__schema.sql</text>
+
+  <!-- ===================== RELATIONSHIP CURVES ===================== -->
+
+  <!-- 1. usuarios.area_id -> areas.id (pink) -->
+  <path d="M 340,233 Q 570,270 800,93" fill="none" stroke="#db2777" stroke-width="2"/>
+  <text x="344" y="248" class="rel-card" fill="#db2777">0..1</text>
+  <text x="762" y="86" class="rel-card" fill="#db2777">0..N</text>
+  <text x="490" y="235" class="rel-label" fill="#db2777">area_id</text>
+
+  <!-- 2. areas.gerente_id -> usuarios.id (cyan) -->
+  <path d="M 800,149 Q 570,60 340,93" fill="none" stroke="#0891b2" stroke-width="2"/>
+  <text x="748" y="165" class="rel-card" fill="#0891b2">0..1</text>
+  <text x="345" y="86" class="rel-card" fill="#0891b2">0..N</text>
+  <text x="500" y="70" class="rel-label" fill="#0891b2">gerente_id</text>
+
+  <!-- 3. archivos.propietario_id -> usuarios.id (lime) -->
+  <path d="M 140,470 Q 108,370 160,270" fill="none" stroke="#65a30d" stroke-width="2"/>
+  <text x="144" y="460" class="rel-card" fill="#65a30d">1</text>
+  <text x="164" y="282" class="rel-card" fill="#65a30d">0..N</text>
+  <text x="30" y="374" class="rel-label" fill="#65a30d">propietario_id</text>
+
+  <!-- 4. archivos.area_id -> areas.id (orange) -->
+  <path d="M 310,470 Q 560,340 860,210" fill="none" stroke="#ea580c" stroke-width="2"/>
+  <text x="314" y="460" class="rel-card" fill="#ea580c">0..1</text>
+  <text x="822" y="222" class="rel-card" fill="#ea580c">0..N</text>
+  <text x="560" y="320" class="rel-label" fill="#ea580c">area_id</text>
+
+  <!-- 5. historial_acciones.usuario_id -> usuarios.id (red) -->
+  <path d="M 850,470 Q 560,380 300,270" fill="none" stroke="#dc2626" stroke-width="2"/>
+  <text x="810" y="460" class="rel-card" fill="#dc2626">1</text>
+  <text x="304" y="282" class="rel-card" fill="#dc2626">0..N</text>
+  <text x="470" y="405" class="rel-label" fill="#dc2626">usuario_id</text>
+
+  <!-- 6. historial_acciones.archivo_id -> archivos.id (slate) -->
+  <path d="M 800,579 Q 580,545 360,523" fill="none" stroke="#475569" stroke-width="2"/>
+  <text x="748" y="596" class="rel-card" fill="#475569">0..1</text>
+  <text x="366" y="516" class="rel-card" fill="#475569">0..N</text>
+  <text x="540" y="564" class="rel-label" fill="#475569">archivo_id</text>
+
+  <!-- ===================== USUARIOS ===================== -->
+  <g>
+    <rect x="40" y="40" width="300" height="230" fill="#ffffff" stroke="#1d4ed8" stroke-width="1.5" rx="6"/>
+    <path d="M 40,46 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#1d4ed8"/>
+    <text x="56" y="63" class="tbl-header">USUARIOS</text>
+
+    <rect x="56" y="82" width="20" height="14" rx="3" fill="#1d4ed8"/>
+    <text x="60" y="92" class="badge-pk">PK</text>
+    <text x="86" y="93" class="col-name">id</text>
+    <text x="324" y="93" class="col-type" text-anchor="end">bigint</text>
+    <line x1="40" y1="102" x2="340" y2="102" stroke="#e5e7eb"/>
+
+    <text x="86" y="121" class="col-name">nombre</text>
+    <text x="324" y="121" class="col-type" text-anchor="end">varchar(150)</text>
+    <line x1="40" y1="130" x2="340" y2="130" stroke="#e5e7eb"/>
+
+    <text x="86" y="149" class="col-name">email</text>
+    <text x="324" y="149" class="col-type" text-anchor="end">varchar(150) UQ</text>
+    <line x1="40" y1="158" x2="340" y2="158" stroke="#e5e7eb"/>
+
+    <text x="86" y="177" class="col-name">password_hash</text>
+    <text x="324" y="177" class="col-type" text-anchor="end">varchar(255)</text>
+    <line x1="40" y1="186" x2="340" y2="186" stroke="#e5e7eb"/>
+
+    <text x="86" y="205" class="col-name">rol</text>
+    <text x="324" y="205" class="col-type" text-anchor="end">varchar(30)</text>
+    <line x1="40" y1="214" x2="340" y2="214" stroke="#e5e7eb"/>
+
+    <rect x="56" y="222" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="59" y="232" class="badge-fk">FK</text>
+    <text x="86" y="233" class="col-name">area_id</text>
+    <text x="324" y="233" class="col-type" text-anchor="end">bigint NULL</text>
+
+    <text x="56" y="255" class="note">rol ∈ {USUARIO_ESTANDAR, JEFE_AREA, GERENTE, ADMINISTRADOR}</text>
+  </g>
+
+  <!-- ===================== AREAS ===================== -->
+  <g>
+    <rect x="800" y="40" width="300" height="170" fill="#ffffff" stroke="#15803d" stroke-width="1.5" rx="6"/>
+    <path d="M 800,46 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#15803d"/>
+    <text x="816" y="63" class="tbl-header">AREAS</text>
+
+    <rect x="816" y="82" width="20" height="14" rx="3" fill="#15803d"/>
+    <text x="820" y="92" class="badge-pk">PK</text>
+    <text x="846" y="93" class="col-name">id</text>
+    <text x="1084" y="93" class="col-type" text-anchor="end">bigint</text>
+    <line x1="800" y1="102" x2="1100" y2="102" stroke="#e5e7eb"/>
+
+    <text x="846" y="121" class="col-name">nombre</text>
+    <text x="1084" y="121" class="col-type" text-anchor="end">varchar(100) UQ</text>
+    <line x1="800" y1="130" x2="1100" y2="130" stroke="#e5e7eb"/>
+
+    <rect x="816" y="138" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="819" y="148" class="badge-fk">FK</text>
+    <text x="846" y="149" class="col-name">gerente_id</text>
+    <text x="1084" y="149" class="col-type" text-anchor="end">bigint NULL</text>
+
+    <text x="816" y="180" class="note">gerente_id referencia a un usuario con rol GERENTE</text>
+  </g>
+
+  <!-- ===================== ARCHIVOS ===================== -->
+  <g>
+    <rect x="40" y="470" width="320" height="272" fill="#ffffff" stroke="#b45309" stroke-width="1.5" rx="6"/>
+    <path d="M 40,476 a 6,6 0 0 1 6,-6 h 308 a 6,6 0 0 1 6,6 v 28 h -320 z" fill="#b45309"/>
+    <text x="56" y="493" class="tbl-header">ARCHIVOS</text>
+
+    <rect x="56" y="512" width="20" height="14" rx="3" fill="#b45309"/>
+    <text x="60" y="522" class="badge-pk">PK</text>
+    <text x="86" y="523" class="col-name">id</text>
+    <text x="344" y="523" class="col-type" text-anchor="end">uuid</text>
+    <line x1="40" y1="532" x2="360" y2="532" stroke="#e5e7eb"/>
+
+    <text x="86" y="551" class="col-name">nombre_original</text>
+    <text x="344" y="551" class="col-type" text-anchor="end">varchar(255)</text>
+    <line x1="40" y1="560" x2="360" y2="560" stroke="#e5e7eb"/>
+
+    <text x="86" y="579" class="col-name">storage_key</text>
+    <text x="344" y="579" class="col-type" text-anchor="end">varchar(100) UQ</text>
+    <line x1="40" y1="588" x2="360" y2="588" stroke="#e5e7eb"/>
+
+    <text x="86" y="607" class="col-name">content_type</text>
+    <text x="344" y="607" class="col-type" text-anchor="end">varchar(150)</text>
+    <line x1="40" y1="616" x2="360" y2="616" stroke="#e5e7eb"/>
+
+    <text x="86" y="635" class="col-name">tamanio</text>
+    <text x="344" y="635" class="col-type" text-anchor="end">bigint</text>
+    <line x1="40" y1="644" x2="360" y2="644" stroke="#e5e7eb"/>
+
+    <rect x="56" y="652" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="59" y="662" class="badge-fk">FK</text>
+    <text x="86" y="663" class="col-name">propietario_id</text>
+    <text x="344" y="663" class="col-type" text-anchor="end">bigint</text>
+    <line x1="40" y1="672" x2="360" y2="672" stroke="#e5e7eb"/>
+
+    <rect x="56" y="680" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="59" y="690" class="badge-fk">FK</text>
+    <text x="86" y="691" class="col-name">area_id</text>
+    <text x="344" y="691" class="col-type" text-anchor="end">bigint NULL</text>
+    <line x1="40" y1="700" x2="360" y2="700" stroke="#e5e7eb"/>
+
+    <text x="86" y="719" class="col-name">fecha_carga</text>
+    <text x="344" y="719" class="col-type" text-anchor="end">timestamp</text>
+  </g>
+
+  <!-- ===================== HISTORIAL_ACCIONES ===================== -->
+  <g>
+    <rect x="800" y="470" width="300" height="292" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="6"/>
+    <path d="M 800,476 a 6,6 0 0 1 6,-6 h 288 a 6,6 0 0 1 6,6 v 28 h -300 z" fill="#7c3aed"/>
+    <text x="816" y="493" class="tbl-header">HISTORIAL_ACCIONES</text>
+
+    <rect x="816" y="512" width="20" height="14" rx="3" fill="#7c3aed"/>
+    <text x="820" y="522" class="badge-pk">PK</text>
+    <text x="846" y="523" class="col-name">id</text>
+    <text x="1084" y="523" class="col-type" text-anchor="end">bigint</text>
+    <line x1="800" y1="532" x2="1100" y2="532" stroke="#e5e7eb"/>
+
+    <rect x="816" y="540" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="819" y="550" class="badge-fk">FK</text>
+    <text x="846" y="551" class="col-name">usuario_id</text>
+    <text x="1084" y="551" class="col-type" text-anchor="end">bigint</text>
+    <line x1="800" y1="560" x2="1100" y2="560" stroke="#e5e7eb"/>
+
+    <rect x="816" y="568" width="20" height="14" rx="3" fill="#6b7280"/>
+    <text x="819" y="578" class="badge-fk">FK</text>
+    <text x="846" y="579" class="col-name">archivo_id</text>
+    <text x="1084" y="579" class="col-type" text-anchor="end">uuid NULL</text>
+    <line x1="800" y1="588" x2="1100" y2="588" stroke="#e5e7eb"/>
+
+    <text x="846" y="607" class="col-name">accion</text>
+    <text x="1084" y="607" class="col-type" text-anchor="end">varchar(30)</text>
+    <line x1="800" y1="616" x2="1100" y2="616" stroke="#e5e7eb"/>
+
+    <text x="846" y="635" class="col-name">fecha</text>
+    <text x="1084" y="635" class="col-type" text-anchor="end">timestamp</text>
+    <line x1="800" y1="644" x2="1100" y2="644" stroke="#e5e7eb"/>
+
+    <text x="846" y="663" class="col-name">detalle</text>
+    <text x="1084" y="663" class="col-type" text-anchor="end">varchar(255)</text>
+
+    <text x="816" y="690" class="note">accion ∈ {CARGA, VISUALIZACION,</text>
+    <text x="826" y="703" class="note">DESCARGA, ELIMINACION}</text>
+    <text x="816" y="722" class="note">archivo_id queda en NULL si el</text>
+    <text x="826" y="735" class="note">archivo se elimina (ON DELETE</text>
+    <text x="826" y="748" class="note">SET NULL)</text>
+  </g>
+
+  <!-- Legend -->
+  <text x="30" y="800" class="subtitle">Notación: "1" = lado obligatorio (NOT NULL) · "0..1" = lado opcional (columna NULL) · "0..N" = lado de "muchos" referenciado por la llave foránea</text>
+  <text x="30" y="816" class="subtitle">PK = llave primaria · FK = llave foránea · UQ = restricción unique</text>
+</svg>
