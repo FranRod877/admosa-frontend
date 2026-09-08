@@ -263,6 +263,11 @@ button.danger {
   font-size: 14px;
 }
 
+.success {
+  color: #2f8f52;
+  font-size: 14px;
+}
+
 .empty {
   color: var(--text);
   font-size: 14px;
@@ -298,6 +303,28 @@ button.danger {
   color: var(--text);
   font-weight: 500;
   background: var(--code-bg);
+}
+
+.filter-row th {
+  padding: 6px 14px 10px;
+  background: var(--code-bg);
+}
+
+.filter-input {
+  width: 100%;
+  min-width: 90px;
+  font: inherit;
+  font-weight: 400;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.filter-input::placeholder {
+  color: var(--text);
 }
 
 /* History badges */

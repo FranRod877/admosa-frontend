@@ -1,7 +1,22 @@
 import { useEffect, useState } from 'react'
 import * as usersApi from '../api/usersApi'
+import { FilterInput } from '../components/FilterInput'
 import type { AreaResponse, Rol, Usuario } from '../types'
 import { ALL_ROLES, roleLabel } from '../utils/roles'
+
+interface Filtros {
+  nombre: string
+  correo: string
+  rol: string
+  area: string
+  areasGestiona: string
+}
+
+const FILTROS_VACIOS: Filtros = { nombre: '', correo: '', rol: '', area: '', areasGestiona: '' }
+
+function coincide(valor: string, filtro: string): boolean {
+  return valor.toLowerCase().includes(filtro.toLowerCase())
+}
 
 export function UsersPage() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([])
@@ -9,6 +24,7 @@ export function UsersPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [savingId, setSavingId] = useState<number | null>(null)
+  const [filtros, setFiltros] = useState<Filtros>(FILTROS_VACIOS)
 
   const load = async () => {
     setLoading(true)
@@ -27,6 +43,10 @@ export function UsersPage() {
   useEffect(() => {
     load()
   }, [])
+
+  const actualizarFiltro = (campo: keyof Filtros, valor: string) => {
+    setFiltros((prev) => ({ ...prev, [campo]: valor }))
+  }
 
   const handleRolChange = async (usuario: Usuario, rol: Rol) => {
     setSavingId(usuario.id)
@@ -68,6 +88,20 @@ export function UsersPage() {
     }
   }
 
+  const usuariosFiltrados = usuarios.filter((usuario) => {
+    const areasGestionadas = areas
+      .filter((area) => area.gerenteId === usuario.id)
+      .map((area) => area.nombre)
+      .join(', ')
+    return (
+      coincide(usuario.nombre, filtros.nombre) &&
+      coincide(usuario.email, filtros.correo) &&
+      coincide(roleLabel(usuario.rol), filtros.rol) &&
+      coincide(usuario.areaNombre ?? '', filtros.area) &&
+      coincide(areasGestionadas, filtros.areasGestiona)
+    )
+  })
+
   return (
     <section>
       <div className="section-header">
@@ -89,58 +123,71 @@ export function UsersPage() {
                 <th>Área</th>
                 <th>Áreas que gestiona</th>
               </tr>
+              <tr className="filter-row">
+                <th><FilterInput value={filtros.nombre} onChange={(v) => actualizarFiltro('nombre', v)} /></th>
+                <th><FilterInput value={filtros.correo} onChange={(v) => actualizarFiltro('correo', v)} /></th>
+                <th><FilterInput value={filtros.rol} onChange={(v) => actualizarFiltro('rol', v)} /></th>
+                <th><FilterInput value={filtros.area} onChange={(v) => actualizarFiltro('area', v)} /></th>
+                <th><FilterInput value={filtros.areasGestiona} onChange={(v) => actualizarFiltro('areasGestiona', v)} /></th>
+              </tr>
             </thead>
             <tbody>
-              {usuarios.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td>{usuario.nombre}</td>
-                  <td>{usuario.email}</td>
-                  <td>
-                    <select
-                      value={usuario.rol}
-                      disabled={savingId === usuario.id}
-                      onChange={(e) => handleRolChange(usuario, e.target.value as Rol)}
-                    >
-                      {ALL_ROLES.map((rol) => (
-                        <option key={rol} value={rol}>
-                          {roleLabel(rol)}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td>
-                    <select
-                      value={usuario.areaId ?? ''}
-                      disabled={savingId === usuario.id}
-                      onChange={(e) => handleAreaChange(usuario, e.target.value)}
-                    >
-                      <option value="">Sin área</option>
-                      {areas.map((area) => (
-                        <option key={area.id} value={area.id}>
-                          {area.nombre}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td>
-                    {usuario.rol === 'GERENTE' ? (
-                      areas.map((area) => (
-                        <label key={area.id} className="checkbox-label">
-                          <input
-                            type="checkbox"
-                            checked={area.gerenteId === usuario.id}
-                            disabled={savingId === usuario.id}
-                            onChange={(e) => handleGerenteAreaToggle(area, usuario, e.target.checked)}
-                          />
-                          {area.nombre}
-                        </label>
-                      ))
-                    ) : (
-                      <span className="empty">—</span>
-                    )}
-                  </td>
+              {usuariosFiltrados.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="empty">Sin resultados para el filtro aplicado.</td>
                 </tr>
-              ))}
+              ) : (
+                usuariosFiltrados.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td>{usuario.nombre}</td>
+                    <td>{usuario.email}</td>
+                    <td>
+                      <select
+                        value={usuario.rol}
+                        disabled={savingId === usuario.id}
+                        onChange={(e) => handleRolChange(usuario, e.target.value as Rol)}
+                      >
+                        {ALL_ROLES.map((rol) => (
+                          <option key={rol} value={rol}>
+                            {roleLabel(rol)}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td>
+                      <select
+                        value={usuario.areaId ?? ''}
+                        disabled={savingId === usuario.id}
+                        onChange={(e) => handleAreaChange(usuario, e.target.value)}
+                      >
+                        <option value="">Sin área</option>
+                        {areas.map((area) => (
+                          <option key={area.id} value={area.id}>
+                            {area.nombre}
+                          </option>
+                        ))}
+                      </select>
+                    </td>
+                    <td>
+                      {usuario.rol === 'GERENTE' ? (
+                        areas.map((area) => (
+                          <label key={area.id} className="checkbox-label">
+                            <input
+                              type="checkbox"
+                              checked={area.gerenteId === usuario.id}
+                              disabled={savingId === usuario.id}
+                              onChange={(e) => handleGerenteAreaToggle(area, usuario, e.target.checked)}
+                            />
+                            {area.nombre}
+                          </label>
+                        ))
+                      ) : (
+                        <span className="empty">—</span>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
